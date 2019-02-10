@@ -10,6 +10,11 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const CREATED_AT = 'createdAt';
+    const UPDATED_AT = 'updatedAt';
+
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,4 +32,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class,'roles_user','userId','roleId');
+    }
 }

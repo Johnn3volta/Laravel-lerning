@@ -18,3 +18,15 @@ Route::get('/', function () {
 Route::get('/test',function (){
    return 'Hello World !';
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/roles',function (){
+  $user = \Illuminate\Support\Facades\Auth::user();
+
+  return response()->json([
+    'roles' => $user->roles
+  ]);
+});
