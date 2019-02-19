@@ -11,22 +11,18 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (){
     return view('welcome');
 });
 
-Route::get('/test',function (){
-   return 'Hello World !';
+Route::get('/test', function (){
+    return 'Hello World !';
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/roles',function (){
-  $user = \Illuminate\Support\Facades\Auth::user();
-
-  return response()->json([
-    'roles' => $user->roles
-  ]);
-});
+Route::get('/admin', function (){
+    return view('admin');
+})->name('admin.post')->middleware('role:editor');
